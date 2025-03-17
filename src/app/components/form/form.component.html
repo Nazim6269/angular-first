@@ -1,8 +1,8 @@
-<div class="">
+<div class="h-[80vh] flex justify-center items-center">
   <form
     [formGroup]="registerForm"
     (ngSubmit)="onSubmit()"
-    class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4"
+    class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4 hover:border"
   >
     <div class="flex flex-col">
       <label for="name" class="font-medium text-gray-700">Name:</label>
@@ -10,9 +10,23 @@
         type="text"
         id="name"
         formControlName="name"
-        class="mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        [ngClass]="{
+          'border-red-500': name?.invalid && (name?.dirty || name?.touched)
+        }"
+        class="mt-1 px-3 py-2 border border-gray-300 rounded-md focus-visible:ring-0 focus:outline-0"
         placeholder="Enter your name"
       />
+      <div
+        *ngIf="name?.invalid && (name?.dirty || name?.touched)"
+        class="text-red-700"
+        aria-live="polite"
+      >
+        <div *ngIf="name?.hasError('required')">Name is required.</div>
+        <div *ngIf="name?.hasError('minlength')">
+          Name must be at least 4 characters long.
+        </div>
+        <div *ngIf="name?.hasError('forbiddenName')">Name cannot be Bob.</div>
+      </div>
     </div>
 
     <div class="flex flex-col">
@@ -21,9 +35,20 @@
         type="email"
         id="email"
         formControlName="email"
-        class="mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        [ngClass]="{
+          'border-red-500': email?.invalid && (email?.dirty || email?.touched)
+        }"
+        class="mt-1 px-3 py-2 border border-gray-300 rounded-md focus-visible:ring-0 focus:outline-0"
         placeholder="Enter your email"
       />
+      <div
+        *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+        class="text-red-700"
+        aria-live="polite"
+      >
+        <div *ngIf="email?.hasError('required')">Email is Required</div>
+        <div *ngIf="email?.hasError('email')">Must be a valid email</div>
+      </div>
     </div>
 
     <div class="flex flex-col">
@@ -32,13 +57,32 @@
         type="password"
         id="password"
         formControlName="password"
-        class="mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        [ngClass]="{
+          'border-red-500':
+            password?.invalid && (password?.dirty || password?.touched)
+        }"
+        class="mt-1 px-3 py-2 border border-gray-300 rounded-md focus-visible:ring-0 focus:outline-0"
         placeholder="Enter your password"
       />
+
+      <div
+        class="text-red-700"
+        aria-live="polite"
+        *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+      >
+        <div *ngIf="password?.hasError('required')">Password is Required</div>
+        <div *ngIf="password?.hasError('pattern')">Password must be number</div>
+        <div *ngIf="password?.hasError('minlength')">
+          Password at least 5 digits
+        </div>
+        <div *ngIf="password?.hasError('maxlength')">
+          Password at most 8 digits
+        </div>
+      </div>
     </div>
 
     <button
-      type="button"
+      type="submit"
       (click)="updateName()"
       class="w-full mt-4 bg-red-500 text-white font-semibold py-2 rounded-md hover:bg-red-600 transition"
     >
