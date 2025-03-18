@@ -2,8 +2,9 @@
   <form
     [formGroup]="registerForm"
     (ngSubmit)="onSubmit()"
-    class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4 hover:border"
+    class="min-w-md mx-auto bg-white p-6 rounded-lg shadow-lg space-y-4"
   >
+    <!-- name input div -->
     <div class="flex flex-col">
       <label for="name" class="font-medium text-gray-700">Name:</label>
       <input
@@ -25,10 +26,11 @@
         <div *ngIf="name?.hasError('minlength')">
           Name must be at least 4 characters long.
         </div>
-        <div *ngIf="name?.hasError('forbiddenName')">Name cannot be Bob.</div>
+        <div *ngIf="name?.hasError('forbiddenName')">Name cannot be Bobs.</div>
       </div>
     </div>
 
+    <!-- email input div -->
     <div class="flex flex-col">
       <label for="email" class="font-medium text-gray-700">Email:</label>
       <input
@@ -51,6 +53,7 @@
       </div>
     </div>
 
+    <!-- password input div -->
     <div class="flex flex-col">
       <label for="password" class="font-medium text-gray-700">Password:</label>
       <input
@@ -83,7 +86,6 @@
 
     <button
       type="submit"
-      (click)="updateName()"
       class="w-full mt-4 bg-red-500 text-white font-semibold py-2 rounded-md hover:bg-red-600 transition"
     >
       Submit

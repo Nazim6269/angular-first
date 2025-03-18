@@ -12,7 +12,7 @@ import {
 export function forbiddenNameValidator(forbiddenPattern: RegExp) {
   return (control: FormControl) => {
     return forbiddenPattern.test(control.value)
-      ? { forbiddenName: true }
+      ? { forbiddenName: { value: control.value } }
       : null;
   };
 }
@@ -63,9 +63,6 @@ export class FormComponent {
 
   onSubmit() {
     console.log(this.registerForm.value);
-  }
-
-  updateName() {
     this.registerForm.reset();
   }
 }
