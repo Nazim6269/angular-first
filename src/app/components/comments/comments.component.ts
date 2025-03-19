@@ -18,7 +18,5 @@ export class CommentsComponent implements OnInit {
     this.commentService.getComments().subscribe((commetns: Comment[]) => {
       this.comments = commetns;
     });
-
-    console.log(this.comments);
   }
 }

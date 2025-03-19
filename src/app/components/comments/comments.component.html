@@ -1,19 +1,21 @@
-<div>
-  <table>
+<div class="overflow-x-auto p-4 bg-white shadow-md rounded-lg">
+  <table class="w-full border-collapse border border-gray-300">
     <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Body</th>
+      <tr class="bg-gray-200 text-gray-700">
+        <th class="border border-gray-300 px-4 py-2 text-left">ID</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Body</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let comment of comments">
-        <td>{{ comment.id }}</td>
-        <td>{{ comment.name }}</td>
-        <td>{{ comment.email }}</td>
-        <td>{{ comment.body }}</td>
+      <tr *ngFor="let comment of comments" class="hover:bg-gray-100">
+        <td class="border border-gray-300 px-4 py-2">{{ comment.id }}</td>
+        <td class="border border-gray-300 px-4 py-2">{{ comment.name }}</td>
+        <td class="border border-gray-300 px-4 py-2 text-blue-600 underline">
+          {{ comment.email }}
+        </td>
+        <td class="border border-gray-300 px-4 py-2">{{ comment.body }}</td>
       </tr>
     </tbody>
   </table>

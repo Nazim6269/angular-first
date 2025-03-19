@@ -1,33 +1,23 @@
 import { NgClass, NgFor, NgOptimizedImage } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Comment } from '../../../../comment.interface';
+import { CommentService } from '../comments/comments.service';
 
 @Component({
   selector: 'products',
   templateUrl: './products.component.html',
-  imports: [NgFor, NgClass, NgOptimizedImage],
+  imports: [NgFor, NgClass, NgOptimizedImage, RouterLink, RouterLinkActive],
+  standalone: true,
 })
-export default class ProuductsComponent {
-  users = [
-    {
-      id: 1,
-      name: 'John Doe',
-      email: 'johndoe@example.com',
-      age: 30,
-      isActive: true,
-    },
-    {
-      id: 2,
-      name: 'Jane Smith',
-      email: 'janesmith@example.com',
-      age: 25,
-      isActive: false,
-    },
-    {
-      id: 3,
-      name: 'Alice Johnson',
-      email: 'alicejohnson@example.com',
-      age: 28,
-      isActive: true,
-    },
-  ];
+export default class ProuductsComponent implements OnInit {
+  comments: Comment[] = [];
+
+  constructor(private commentService: CommentService) {}
+
+  ngOnInit(): void {
+    this.commentService.getComments().subscribe((comments: Comment[]) => {
+      this.comments = comments.slice(0, 20);
+    });
+  }
 }

@@ -1,28 +1,39 @@
-<div class="flex max-w-7xl min-h-screen mx-auto justify-between items-center">
-  <div
-    *ngFor="let user of users"
-    class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white"
-  >
-    <img
-      class="h-48 object-cover"
-      ngSrc="card-image.jpeg"
-      height="4500"
-      width="3000"
-    />
+<div class="px-3 py-5">
+  <h2 class="text-3xl font-bold mb-2">Products</h2>
+  <div class="grid grid-cols-4 space-y-3">
+    <div
+      *ngFor="let comment of comments"
+      class="max-w-sm border rounded-lg overflow-hidden shadow-lg bg-white"
+    >
+      <a
+        [routerLink]="'/single-product/' + comment.id"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+      >
+        <img
+          class="h-48 object-cover"
+          ngSrc="card-image.jpeg"
+          height="4500"
+          width="3000"
+        />
+      </a>
 
-    <div class="p-6">
-      <h2 class="text-xl font-bold mb-2">{{ user.name }}</h2>
-      <p
-        [ngClass]="user.name ? 'text-blue-700 text-sm mb-4' : 'text-yellow-400'"
-      >
-        {{ user.email }}
-      </p>
-      <p class="text-gray-700 text-sm mb-4">{{ user.age }}</p>
-      <button
-        class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
-      >
-        Button
-      </button>
+      <div class="p-6">
+        <h2 class="text-xl font-bold mb-2">{{ comment.name }}</h2>
+        <p
+          [ngClass]="
+            comment.name ? 'text-blue-700 text-sm mb-4' : 'text-yellow-400'
+          "
+        >
+          {{ comment.email }}
+        </p>
+
+        <button
+          class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+        >
+          Button
+        </button>
+      </div>
     </div>
   </div>
 </div>
